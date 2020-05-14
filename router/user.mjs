@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllUser, createUser, updateUser, deleteUser, getUserByCondition } from '../db/api/user.mjs'
+import { getAllUser, createUser, updateUser, deleteUser, getUserByCondition } from '../db/service/user.mjs'
 const router = express.Router()
 router.get('/', async (request, response, next) => {
     // console.log('request', request.query)
@@ -16,7 +16,6 @@ router.get('/:id', async (request, response, next) => {
     if (users) {
         users = users.dataValues
     }
-    console.log('users', users)
     response.json(users)
 })
 

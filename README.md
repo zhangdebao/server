@@ -1,4 +1,4 @@
-###### 提交 husky
+### 提交 husky
 
 - upd：更新某功能（不是 feat, 不是 fix）
 - feat：新功能（feature）
@@ -8,5 +8,12 @@
 - refactor：重构（即不是新增功能，也不是修改 bug 的代码变动）
 - test：增加测试
 - chore：构建过程或辅助工具的变动
+
+### nodemon  Node自动重启工具 nodemon
+
+### 数据库
+— mysql
+- ORM框架 sequelize
+
 
 
