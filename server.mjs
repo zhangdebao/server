@@ -1,6 +1,8 @@
 import App from './router/index.mjs'
 import http from 'http'
-import {PORT, HOST} from './common/config'
+import {PORT, HOST} from './common/config.mjs'
+import initDB from './db/syncTable.mjs'
+initDB()
 App.set('port', PORT)
 const server = http.createServer(App)
 server.listen(PORT)
