@@ -13,6 +13,10 @@ User.init({
         type: Sequelize.STRING(255),
         defaultValue: ''
     },
+    avatar: {
+        type: Sequelize.STRING(255),
+        defaultValue: ''
+    },
     password: {
         type: Sequelize.STRING(255),
         defaultValue: ''

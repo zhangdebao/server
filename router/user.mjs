@@ -1,11 +1,11 @@
 import express from 'express'
 import { getAllUser, createUser, updateUser, deleteUser, getUserByCondition } from '../db/service/user.mjs'
+import { setResult } from '../db/dao/result.mjs'
 const router = express.Router()
 router.get('/', async (request, response, next) => {
-    // console.log('request', request.query)
     let users = await getAllUser()
     users = users.map(item => item.dataValues)
-    response.json(users)
+    response.send(setResult(users))
 })
 
 router.get('/:id', async (request, response, next) => {
@@ -16,12 +16,12 @@ router.get('/:id', async (request, response, next) => {
     if (users) {
         users = users.dataValues
     }
-    response.json(users)
+    response.json(setResult(users))
 })
 
 router.post('/', async (request, response, next) => {
     const user = await createUser(request.body)
-    response.json(user.dataValues)
+    response.json(setResult(user.dataValues))
 })
 
 router.put('/', async (request, response, next) => {
@@ -29,11 +29,11 @@ router.put('/', async (request, response, next) => {
     const condition = JSON.parse(body.condition)
     delete body.condition
     const user = await updateUser(body, condition)
-    response.json(user.dataValues)
+    response.json(setResult(user.dataValues))
 })
 
 router.delete('/', async (request, response, next) => {
     const user = await deleteUser(request.body)
-    response.json(user.dataValues)
+    response.json(setResult(user.dataValues))
 })
 export default router
