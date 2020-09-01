@@ -32,8 +32,9 @@ router.put('/', async (request, response, next) => {
     response.json(setResult(user.dataValues))
 })
 
-router.delete('/', async (request, response, next) => {
-    const user = await deleteUser(request.body)
+router.delete('/:id', async (request, response, next) => {
+    const condition = request.params
+    const user = await deleteUser(condition)
     response.json(setResult(user.dataValues))
 })
 export default router
