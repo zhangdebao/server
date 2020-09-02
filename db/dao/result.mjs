@@ -1,6 +1,7 @@
-export function setResult(data) {
+export function setResult({ data, message }) {
   return {
     code: 200,
-    data
+    data,
+    message
   }
  }

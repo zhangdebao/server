@@ -5,7 +5,9 @@ const router = express.Router()
 router.get('/', async (request, response, next) => {
     let users = await getAllUser()
     users = users.map(item => item.dataValues)
-    response.send(setResult(users))
+    response.send(setResult({
+        data: users
+    }))
 })
 
 router.get('/:id', async (request, response, next) => {
@@ -16,20 +18,37 @@ router.get('/:id', async (request, response, next) => {
     if (users) {
         users = users.dataValues
     }
-    response.json(setResult(users))
+    response.json(setResult({
+        data: users
+    }))
 })
 
 router.post('/', async (request, response, next) => {
-    const user = await createUser(request.body)
-    response.json(setResult(user.dataValues))
+    const num = await createUser(request.body)
+    let message = '添加用户成功!'
+    if (num.length === 1) { 
+        message = '添加用户失败!'
+    }
+    response.json(setResult({
+        message
+    }))
 })
 
-router.put('/', async (request, response, next) => {
+router.put('/:id', async (request, response, next) => {
     const body = request.body
-    const condition = JSON.parse(body.condition)
-    delete body.condition
-    const user = await updateUser(body, condition)
-    response.json(setResult(user.dataValues))
+    const { id } = request.params
+    const condition = {
+        id
+    }
+    const num = await updateUser(body, condition)
+    console.log('num', num)
+    let message = '修改用户成功!'
+    if (num.length < 1) {
+        message = '修改用户失败!'
+    }
+    response.send(setResult({
+        message
+    }))
 })
 
 router.delete('/:id', async (request, response, next) => {
